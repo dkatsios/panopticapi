@@ -79,7 +79,7 @@ def pq_compute_single_core(proc_id, annotation_set, gt_folder, pred_folder, cate
 
         pan_gt = np.array(Image.open(os.path.join(gt_folder, gt_ann['file_name'])), dtype=np.uint32)
         pan_gt = pan_gt[:, :, 0] + pan_gt[:, :, 1] * 256 + pan_gt[:, :, 2] * 256 * 256
-        pan_pred = np.array(Image.open(os.path.join(pred_folder, pred_ann['file_name'])), dtype=np.uint32)
+        pan_pred = np.array(Image.open(os.path.join(pred_folder, pred_ann['file_name'].replace('.jpg', '.png'))), dtype=np.uint32)
         pan_pred = pan_pred[:, :, 0] + pan_pred[:, :, 1] * 256 + pan_pred[:, :, 2] * 256 * 256
 
         gt_segms = {el['id']: el for el in gt_ann['segments_info']}
