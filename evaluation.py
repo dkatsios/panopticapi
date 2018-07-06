@@ -11,7 +11,6 @@ from datetime import timedelta
 from collections import defaultdict
 import argparse
 import multiprocessing
-from time import sleep
 
 import PIL.Image as Image
 
@@ -83,7 +82,7 @@ def pq_compute_single_core(proc_id, annotation_set, gt_folder, pred_folder, cate
         print('here')
         print(pred_ann['file_name'].replace('.jpg', '.png'))
         print(pred_ann['file_name'])
-        sleep(1)
+        break
         pan_pred = np.array(Image.open(os.path.join(pred_folder, pred_ann['file_name'].replace('.jpg', '.png'))), dtype=np.uint32)
         pan_pred = pan_pred[:, :, 0] + pan_pred[:, :, 1] * 256 + pan_pred[:, :, 2] * 256 * 256
 
