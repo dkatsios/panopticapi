@@ -178,7 +178,7 @@ def pq_compute(gt_json_file, pred_json_file, gt_folder=None, pred_folder=None):
     for gt_ann in gt_json['annotations']:
         image_id = gt_ann['image_id']
         if image_id not in pred_annotations:
-            print('no prediction for the image with id: {}'.format(img_id))
+            print('no prediction for the image with id: {}'.format(image_id))
             sys.exit(-1)
         matched_annotations_list.append((gt_ann, pred_annotations[image_id]))
 
