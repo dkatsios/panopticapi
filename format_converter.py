@@ -1,8 +1,3 @@
-#!/usr/bin/env python2
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
 import os, sys
 import argparse
 import numpy as np
@@ -90,14 +85,14 @@ def convert_single_core(proc_id, image_set, categories, source_folder, segmentat
     print('Core: {}, all {} images processed'.format(proc_id, len(image_set)))
     return annotations
 
-def default(o):
-    if isinstance(o, np.int64): return int(o)  
-    raise TypeError
-
 def converter(source_folder, images_json_file, categories_json_file,
               segmentations_folder, predictions_json_file,
               VOID=0):
     start_time = time.time()
+    
+    def default(o):
+        if isinstance(o, np.int64): return int(o)  
+        raise TypeError
 
     print("Reading image set information from {}".format(images_json_file))
     with open(images_json_file, 'r') as f:
