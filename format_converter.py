@@ -90,6 +90,9 @@ def convert_single_core(proc_id, image_set, categories, source_folder, segmentat
     print('Core: {}, all {} images processed'.format(proc_id, len(image_set)))
     return annotations
 
+def default(o):
+    if isinstance(o, np.int64): return int(o)  
+    raise TypeError
 
 def converter(source_folder, images_json_file, categories_json_file,
               segmentations_folder, predictions_json_file,
@@ -127,12 +130,11 @@ def converter(source_folder, images_json_file, categories_json_file,
     print("Writing final JSON in {}".format(predictions_json_file))
     d_coco['annotations'] = annotations
     #####
-    return d_coco
-    #with open(predictions_json_file, 'w') as f:
-    #    json.dump(d_coco, f)
+    with open(predictions_json_file, 'w') as f:
+        json.dump(d_coco, f, default=default)
 
-    #t_delta = time.time() - start_time
-    #print("Time elapsed: {:0.2f} seconds".format(t_delta))
+    t_delta = time.time() - start_time
+    print("Time elapsed: {:0.2f} seconds".format(t_delta))
 
 
 if __name__ == "__main__":
